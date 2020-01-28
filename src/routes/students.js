@@ -1,12 +1,20 @@
 // Express
 const express = require("express");
 
+// controller
+const { StudentsCtrl } = require("../controllers");
+
+// Middleware CommonReq => common requests to get by id or username
+// Allows to not write again same requests for common GET :params
+const { CommonReq } = require("../middleware");
+
 // Router
 const router = express.Router();
 
-// To test if all running ok
-router.get("/", async (req, res) => {
-    res.send('OK endpoint!');
-});
+// Student CRUD routes
+router.get("/", StudentsCtrl.getAll);
+router.get("/:id", CommonReq.getById, StudentsCtrl.getById);
+router.post("/", StudentsCtrl.createNew);
+router.patch("/:id", CommonReq.getById, StudentsCtrl.update);
 
 module.exports = router;
