@@ -7,7 +7,8 @@ const projectSchema = {
         minlength: [4, "Name need to be longer then 4 characters"],
         maxlength: [15, "Name cannot exceed 15 characters"],
         required: true,
-        unique: true
+        unique: true,
+        sparse: true
     },
 
     description: {
