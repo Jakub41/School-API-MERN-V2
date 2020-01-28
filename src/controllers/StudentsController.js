@@ -75,8 +75,7 @@ const StudentsController = {
             } else {
                 // Find id and update the fields
                 const updatedStudent = await Student.findByIdAndUpdate(
-                    { _id: res.id._id },
-                    { updatedAt: new Date() },
+                    { _id: res.id._id, updatedAt: new Date() },
                     req.body,
                     (err, response) => {
                         return response;
@@ -89,20 +88,26 @@ const StudentsController = {
                 }
 
                 // Send result
-                res.json(updatedStudent);
+                res.json({ updatedFields: req.body, updatedStudent });
             }
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
     },
 
-    // To DELETE a profile
+    // To DELETE a student
     async delete(req, res) {
         try {
-            // Removing the profile by ID
-            await res.id.remove();
+            // Removing the student by ID
+            const deletedStudent = await res.id.remove();
+
+            // Check
+            if (!deletedStudent) {
+                throw new Error(400, "Student already deleted");
+            }
+
             // Message back
-            res.json({ message: "Deleted This profile" });
+            res.json({ message: "Deleted student" });
         } catch (err) {
             res.status(500).json({ message: err.message });
         }

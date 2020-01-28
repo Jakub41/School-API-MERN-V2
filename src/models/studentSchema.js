@@ -60,6 +60,12 @@ const studentSchema = {
         required: true
     },
 
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+
     email: {
         type: String,
         trim: true,

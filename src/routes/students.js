@@ -16,5 +16,6 @@ router.get("/", StudentsCtrl.getAll);
 router.get("/:id", CommonReq.getById, StudentsCtrl.getById);
 router.post("/", StudentsCtrl.createNew);
 router.patch("/:id", CommonReq.getById, StudentsCtrl.update);
+router.delete("/:id", CommonReq.getById, StudentsCtrl.delete);
 
 module.exports = router;
