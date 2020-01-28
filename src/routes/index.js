@@ -8,6 +8,7 @@ const router = express.Router();
 
 // Defining the Index Routers
 router.use(BaseURL + "students", require("./students"));
+router.use(BaseURL + "projects", require("./projects"));
 
 // Exporting the Index Router
 module.exports = router;

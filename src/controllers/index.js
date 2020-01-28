@@ -1,4 +1,4 @@
 module.exports = {
-    StudentsCtrl: require("./StudentsController")
+    StudentsCtrl: require("./StudentsController"),
+    ProjectCtrl: require("./ProjectsController")
 };
-
