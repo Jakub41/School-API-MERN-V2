@@ -67,6 +67,7 @@ const StudentsController = {
         }
     },
 
+    // TO update one student
     async update(req, res) {
         try {
             // Check for empty req.body
@@ -103,7 +104,7 @@ const StudentsController = {
 
             // Check
             if (!deletedStudent) {
-                throw new Error(400, "Student already deleted");
+                throw new Error(500, "Delete failed");
             }
 
             // Message back
