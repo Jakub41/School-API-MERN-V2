@@ -102,6 +102,17 @@ const studentSchema = {
     }
 };
 
+// projectSchema.pre("update", () => {
+//     this.update(
+//         {},
+//         {
+//             $set: {
+//                 updatedAt: new Date()
+//             }
+//         }
+//     );
+// });
+
 const collectionName = "student";
 const studentSchemaModel = Connect.Schema(studentSchema);
 const Student = Connect.model(collectionName, studentSchemaModel);

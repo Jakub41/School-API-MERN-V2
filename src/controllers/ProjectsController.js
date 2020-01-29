@@ -137,26 +137,43 @@ const ProjectsController = {
                 set["project.$." + field] = updateProject[field];
             }
 
+            // Update the updatedAt as nested element
+            set["project.$.updatedAt"] = Date.now();
+
             // Update the project on that username
             const projectToUpdate = await Student.updateOne(
                 {
                     username: res.username.username,
                     "project._id": req.params.projectId
                 },
-                { $set: set },
-                {
-                    $push: {
-                        updatedAt: new Date()
-                    }
-                }
+                { $set: set }
             );
 
             // Check and send
             if (projectToUpdate)
-                res.json({ Message: "Updated", projectUpdatedFields: req.body });
+                res.json({ Message: "Updated", projectUpdated: req.body });
             else throw new ErrorHandlers.ErrorHandler(500, "Nothing to update");
         } catch (err) {
             res.status(500).json({ message: err.message });
+        }
+    },
+
+    // Delete a project
+    async delete(req, res) {
+        try {
+            // Match with username and pull to remove the project
+            await Student.findOneAndUpdate(
+                { username: res.username.username },
+                { $pull: { project: { _id: req.params.projectId } } },
+                err => {
+                    if (err) {
+                        response.json(err);
+                    }
+                    res.json({ Message: "Deleted" });
+                }
+            );
+        } catch (error) {
+            res.status(500).send(error);
         }
     }
 };
