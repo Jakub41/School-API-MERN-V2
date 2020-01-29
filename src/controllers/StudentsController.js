@@ -1,11 +1,11 @@
-// Profile model
+// Student model
 const { Student } = require("../models");
 // Error handling
 const { ErrorHandlers } = require("../utilities");
 
-// Profiles Controller
+// Students Controller
 const StudentsController = {
-    // To GET ALL the profiles
+    // To GET ALL the students
     async getAll(req, res, next) {
         try {
             // Students from DB & count how many
@@ -30,11 +30,11 @@ const StudentsController = {
 
     // To GET a student by id
     async getById(req, res) {
-        // Send back the profile corresponding on the id
+        // Send back the student corresponding on the id
         res.json(res.id);
     },
 
-    // To Create a new profile
+    // To Create a new student
     async createNew(req, res, next) {
         console.log(req.body);
 
@@ -44,7 +44,7 @@ const StudentsController = {
                 throw new ErrorHandlers.ErrorHandler(500, "Nothing to create");
             }
 
-            // Profile init model
+            // Student init model
             const student = new Student({
                 ...req.body
             });

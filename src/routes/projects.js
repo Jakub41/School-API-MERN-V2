@@ -13,9 +13,9 @@ const router = express.Router();
 
 // Student CRUD routes
 router.get("/:username", CommonReq.getByUserName, ProjectCtrl.getAll);
-// router.get("/:id", CommonReq.getById, StudentsCtrl.getById);
-// router.post("/", StudentsCtrl.createNew);
-// router.patch("/:id", CommonReq.getById, StudentsCtrl.update);
+router.get("/:username/project/:projectId", CommonReq.getByUserName, ProjectCtrl.getById);
+router.post("/:username", CommonReq.getByUserName, ProjectCtrl.createNew);
+router.patch("/:username/project/:projectId", CommonReq.getByUserName, ProjectCtrl.update);
 // router.delete("/:id", CommonReq.getById, StudentsCtrl.delete);
 
 module.exports = router;
