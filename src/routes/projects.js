@@ -11,7 +11,7 @@ const { CommonReq } = require("../middleware");
 // Router
 const router = express.Router();
 
-// Student CRUD routes
+// Project CRUD routes
 router.get("/:username", CommonReq.getByUserName, ProjectCtrl.getAll);
 router.get("/:username/project/:projectId", CommonReq.getByUserName, ProjectCtrl.getById);
 router.post("/:username", CommonReq.getByUserName, ProjectCtrl.createNew);

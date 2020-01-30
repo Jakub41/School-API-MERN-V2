@@ -7,8 +7,10 @@ const express = require("express");
 const router = express.Router();
 
 // Defining the Index Routers
+router.use(BaseURL + "auth", require("./auth"));
 router.use(BaseURL + "students", require("./students"));
 router.use(BaseURL + "projects", require("./projects"));
+router.use(BaseURL + "search", require("./search"));
 
 // Exporting the Index Router
 module.exports = router;

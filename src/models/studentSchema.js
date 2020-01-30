@@ -1,5 +1,6 @@
 const { Connect } = require("../db");
 const { isEmail, isURL, toDate } = require("validator");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const projectSchema = {
     name: {
@@ -66,6 +67,11 @@ const studentSchema = {
         unique: true
     },
 
+    password: {
+        type: String,
+        required: true
+    },
+
     email: {
         type: String,
         trim: true,
@@ -102,19 +108,12 @@ const studentSchema = {
     }
 };
 
-// projectSchema.pre("update", () => {
-//     this.update(
-//         {},
-//         {
-//             $set: {
-//                 updatedAt: new Date()
-//             }
-//         }
-//     );
-// });
-
 const collectionName = "student";
+
 const studentSchemaModel = Connect.Schema(studentSchema);
+studentSchemaModel.plugin(uniqueValidator, {
+    message: "Username and/or Email already used"
+});
 const Student = Connect.model(collectionName, studentSchemaModel);
 
 module.exports = Student;
